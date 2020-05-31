@@ -1,4 +1,4 @@
-service: cake-ordering-system 
+service: cake-ordering-system
 
 plugins:
   - serverless-pseudo-parameters
@@ -10,25 +10,29 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - "dynamodb:PutItem"
-        - "dynamodb:GetItem"
+        - 'dynamodb:PutItem'
+        - 'dynamodb:GetItem'
       Resource:
         - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/ordersTable
     - Effect: Allow
       Action:
-        - "kinesis:PutRecord"
+        - 'kinesis:PutRecord'
       Resource:
         - arn:aws:kinesis:#{AWS::Region}:#{AWS::AccountId}:stream/order-events
     - Effect: Allow
       Action:
-        - "ses:sendEmail"    
+        - 'ses:sendEmail'
       Resource:
-        - "*"
+        - '*'
       Condition:
         StringEquals:
           ses:FromAddress:
-            - "akkascakes@grr.la"
-
+            - 'akkascakes@grr.la'
+    - Effect: Allow
+      Action:
+        - 'sqs:SendMessage'
+      Resource:
+        - arn:aws:sqs:#{AWS::Region}:#{AWS::AccountId}:deliveryServiceQueue
 
 functions:
   createOrder:
@@ -56,8 +60,20 @@ functions:
           arn: arn:aws:kinesis:#{AWS::Region}:#{AWS::AccountId}:stream/order-events
     environment:
       region: ${self:provider.region}
-      cakeProducerEmail: "akkascakes@grr.la"
-      orderingSystemEmail: "akkascakes@grr.la"
+      cakeProducerEmail: 'akkascakes@grr.la'
+      orderingSystemEmail: 'akkascakes@grr.la'
+      deliveryCompanyQueue:
+        Ref: deliveryServiceQueue
+      orderTableName: ordersTable
+  notifyDeliveryCompany:
+    handler: handler.notifyDeliveryCompany
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - deliveryServiceQueue
+              - Arn
+          batchSize: 1
 
 resources:
   Resources:
@@ -71,9 +87,13 @@ resources:
       Properties:
         TableName: ordersTable
         AttributeDefinitions:
-          - AttributeName: "orderId"
-            AttributeType: "S"
+          - AttributeName: 'orderId'
+            AttributeType: 'S'
         KeySchema:
-          - AttributeName: "orderId"
-            KeyType: "HASH"
+          - AttributeName: 'orderId'
+            KeyType: 'HASH'
         BillingMode: PAY_PER_REQUEST
+    deliveryServiceQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: deliveryServiceQueue
