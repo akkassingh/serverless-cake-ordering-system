@@ -9,7 +9,8 @@
   3. There can be multiple data producers and consumers.
   4. Each consumer can have their own progress of reading events and can also go back in time and can read old events as well, as many times as they want.
   5. Ordering of records, Ability to replay records, support for batch processing of records.
-- **AWS SQS:** 1. Fully managed queueing service. 2. Decouple and scale serverless applications. 3. Send, Store and receive messages between components without losing messages. 4. Sender sends the message to SQS, receiver has to pull messages from the SQS Service. 5. Messages can be received by multiple receivers. 6. Whenever one receives a messages, processes it is not available for other receivers to receive. 7. Message replay ability is not present as message once processed is not available to replayed. 8. Might have some latency.
+- **AWS SQS:** 
+  1. Fully managed queueing service. 2. Decouple and scale serverless applications. 3. Send, Store and receive messages between components without losing messages. 4. Sender sends the message to SQS, receiver has to pull messages from the SQS Service. 5. Messages can be received by multiple receivers. 6. Whenever one receives a messages, processes it is not available for other receivers to receive. 7. Message replay ability is not present as message once processed is not available to replayed. 8. Might have some latency.
   , single consumer.
 - **AWS SNS:**
   1. It's a fully managed pub/sub messaging service.
