@@ -1,7 +1,7 @@
 # serverless-cake-ordering-system
 
 #Services used:
-#aws, serverless, lambda, kinesis, dynamodb
+#aws, serverless, lambda, kinesis, dynamodb, sqs
 
 - **AWS Kinesis:**
   1. Primary objective is collecting, storing and processing real-time data streams.
@@ -22,7 +22,8 @@
 1. Clone the repo
 2. Run `npm i`
 3. Run `sls deploy` or `serverless deploy`
-4. To view logs locally:
+4. Download `postman collection` to hit the api's.( change the url's with your's generated one.)
+5. To view logs locally:
    `sls logs -f notifyExternalParties`
 
 - To run function locally:
