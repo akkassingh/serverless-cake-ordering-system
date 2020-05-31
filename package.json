@@ -1,0 +1,18 @@
+{
+  "name": "cake-ordering-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "i": "^0.3.6",
+    "npm": "^6.14.5",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "uuid": "^8.1.0"
+  }
+}
