@@ -29,4 +29,7 @@
   - `sls invoke --function createOrder`
   - `sls invoke local --function createOrder`
 
+- To delete Resources created:
+  - `sls remove`
+
 #### Checkout serverless commands to checkout some serverless commands.

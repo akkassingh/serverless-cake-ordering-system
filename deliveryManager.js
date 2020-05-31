@@ -1,6 +1,7 @@
 'use strict'
 
 const orderManager = require('./orderManager');
+const customerServiceManager = require('./customerServiceManager');
 
 const AWS = require('aws-sdk');
 const sqs = new AWS.SQS({
@@ -24,6 +25,14 @@ module.exports.deliveryOrder = ordersFulfilled => {
     };
 
     return Promise.all(orderFulfilledPromises);
+}
+
+module.exports.orderDelivered = (orderId, deliveryCompanyId, orderReview) => {
+    return orderManager.updateOrderAfterDelivery(orderId, deliveryCompanyId).then(updatedOrder => {
+        return orderManager.saveOrder(updatedOrder).then(() => {
+            return customerServiceManager.notifyCustomerServiceForReview(orderId, orderReview);
+        });
+    });
 }
 
 function notifyDeliveryCompany(order) {

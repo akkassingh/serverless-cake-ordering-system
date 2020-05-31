@@ -54,6 +54,14 @@ module.exports.saveOrder = order => {
     return dynamo.put(params).promise()
 }
 
+module.exports.updateOrderAfterDelivery = (orderId, deliveryCompanyId) => {
+    return getOrder(orderId).then(order => {
+        order.deliveryCompanyId = deliveryCompanyId;
+        order.deliveryDate = Date.now();
+        return order;
+    });
+}
+
 function placeOrderStream(order) {
     const params = {
         Data: JSON.stringify(order),

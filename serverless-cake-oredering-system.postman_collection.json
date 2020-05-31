@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "09e8616f-6f07-4624-8c61-a893a74fd8e7",
+		"name": "serverless-cake-oredering-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"akkas\",\n    \"address\": \"delhi\",\n    \"productId\": \"productId4\",\n    \"quantity\": \"4\"\n}"
+				},
+				"url": {
+					"raw": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order",
+					"protocol": "https",
+					"host": [
+						"i2butgc1vj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order/fulfill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"orderId\": \"620d2bf2-e1cc-4c1a-8e5e-c7146eb3acf1\",\n\t\"fullfillmentId\": \"fullfillmentId4\"\n}"
+				},
+				"url": {
+					"raw": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order/fulfill",
+					"protocol": "https",
+					"host": [
+						"i2butgc1vj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"order",
+						"fulfill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order/delivered",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderId\": \"620d2bf2-e1cc-4c1a-8e5e-c7146eb3acf1\",\n    \"deliveryCompanyId\": \"deliveryCompanyId1\",\n    \"orderReview\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "https://i2butgc1vj.execute-api.us-east-1.amazonaws.com/dev/order/delivered",
+					"protocol": "https",
+					"host": [
+						"i2butgc1vj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"order",
+						"delivered"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
