@@ -1,0 +1,4 @@
+sls deploy
+sls invoke --function createOrder
+sls invoke local --function createOrder
+sls logs -f notifyExternalParties
